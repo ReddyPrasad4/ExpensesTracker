@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th= "http://www.thymeleaf.org">
+
+<head>
+    <title>Expenses Tracker</title>
+    <link rel="icon" th:href="@{/Images/logo.png}">
+    <link rel="stylesheet" th:href="@{/css/homeLayout.css}">
+
+    <style>
+        .imgcontainer {
+            height: 600px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+
+        }
+
+        #mainImg {
+            height: 500px;
+            box-shadow: 5px 5px 5px black;
+        }
+
+        .textContainer {
+            height: 500px;		
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #text{
+            font-size: 24px;
+            line-height: 40px;
+            text-indent: 120px;
+        }
+        footer{
+            height: 40px;
+            background-color: gray;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #msgTag{
+        	position: absolute;
+       		left: 40%;
+       		text-shadow: 1px 1px 1px black;
+       		font-size: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="head-style">
+            <img class="logos" th:src="@{/Images/logo.png}" alt="">
+            <a th:href = "@{/project/sgnInPage}">
+            	<h1 class="heading">Spring Expenses Tracker </h1>
+            </a>
+            
+        </div>
+        <div class="accountContainer">
+            <a th:href = "@{/project/sgnInPage}">
+            	<img class="logos" th:src="@{/Images/account.png}" alt="">
+            </a>
+        </div>
+    </header>
+    <h1 id="msgTag" style="color: red;" th:text="${msg}"> </h1>
+    <section class="imgcontainer"> 
+        <img id="mainImg" th:src="@{/Images/6-business-expense-tracker-1536x1536.jpg}" alt="">
+        <div class="textContainer">
+            <p id="text">
+                The web application “Expense Tracker” is developed to manage the daily expenses in a more
+				efficient and manageable way. By using this application we can reduce the manual calculations of the daily
+				expenses and keep track of the expenditure. In this application, user can provide his income to calculate his
+				total expenses per day and these results will be stored for each user
+            </p>
+        </div>
+    </section>
+    <footer>
+        <p> &copy; 2023 xyz. All rights reserved</p>
+    </footer>
+</body>
+
+</html>

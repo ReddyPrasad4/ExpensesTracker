@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+	<title>About US</title>
+	<link rel="icon" th:href="@{/Images/logo.png}">
+    <link rel="stylesheet"  type="text/css" th:href="@{/css/homeLayout.css}">
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        header,.head-style{
+			background-color: teal;
+		}
+        #container{
+            height: 150vh;
+            width: 100%;
+            background-color: rgb(128, 0, 0);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            
+            
+        }
+        .dataContainers{
+            height: 500px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+        
+        #title{
+            font-size: 100px;
+            color: white;
+            text-shadow: 2px 2px 10px black,2px 2px 15px aqua,-2px -2px 15px khaki;
+        }
+        img{
+            height: 300px;
+        }
+        #aboutExpenses,#pointersContainer{
+            font-size: 30px;
+            letter-spacing: 2px;
+            word-wrap: 8px;
+            width: 800px;
+            color: snow;
+            font-weight: bold;
+        }
+        #aboutExpenses{
+            text-indent: 100px;
+            
+        }
+        #pointersContainer{
+            width: 900px;
+            line-height: 40px;
+        }
+        #heading{
+            font-size: 50px;
+            text-decoration: underline;
+            color: turquoise;
+        }
+        #homeImg{
+			height: 80px;
+		}
+    </style>
+</head>
+<body>
+	<header>
+        <div class="head-style">
+            <img class="logos" th:src="@{/Images/logo.png}" alt="">
+            <h1 class="heading">Spring Expenses Tracker </h1>
+        </div>
+        <a th:href="@{/project/homePage}">
+            <img id="homeImg" th:src="@{/Images/HomeImg.png}" alt="">
+        </a>
+    </header>
+    <section id="container">
+        <h1 id="title">About US</h1>
+        <div class="dataContainers">
+            <img th:src="@{/Images/aboutUS.jpg}">
+            <p id="aboutExpenses">Expense tracking is important in creating a budget for your small business. 
+                Keeping a daily record of your expenses by tracking receipts, invoices, and 
+                other outgoing expenses improves the financial health of your budget. Tracking
+                expenses can help you stay on top of your cash flow and prepare you for tax season.</p>
+        </div>
+        <div class="dataContainers">
+            <img th:src="@{/Images/aboutUS1.webp}" alt="">
+            <div>
+                <h1 id="heading">Key Takeaways : </h1>
+                <p id="pointersContainer">
+                1. Expense tracking helps you take control of your finances and stay on budget <br>
+                2. You can organize your expenses into categories like fixed, periodic, and variable spending <br>
+                3. It's helpful to regularly review your expense tracking on a per-project or time-frame system <br>
+                4. Creating a budget and tracking your expenses are key to spending in a way that grows your business <br>
+                5. Accounting software like an expense tracker app makes it easy to manage your expenses as you go </p>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

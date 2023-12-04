@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Expenses Tracker</title>
+
+    <link rel="icon" th:href="@{/Images/logo.png}">
+    <link rel="stylesheet" th:href="@{/css/homeLayout.css}">
+
+    <style>
+        .loginContainer {
+            height: 600px;
+            width: 100%;
+            /* background-image: linear-gradient(pink,rgb(182, 36, 60)); */
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: space-evenly;
+            background-color: black;
+         
+        }
+		 #a1{
+            width: 300px;
+            height: 300px;
+            border-radius: 100%;
+            background-image: linear-gradient(75deg,red,blue,orange,black,yellow,white,purple,green,lightblue,pink);
+            background-size: 800%;
+            background-position: 800%;
+            animation: backColChange 6s linear  infinite  ;
+            filter: blur(70px);
+         	position: absolute;
+            
+        }
+        @keyframes backColChange{
+            from{
+                background-position: 0%;
+            }
+            to{
+                background-position: 800%;
+            }
+        }
+        #box-container {
+            height: 450px;
+            width: 400px;
+            background-color: rgba(128, 128, 128, 0.386);
+            border-radius: 10px;
+            box-shadow: 1px 1px 20px white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+            position: absolute;
+            z-index: 1;
+            left: 560px;
+            top: 200px;
+         
+        }
+
+        #sinHeading {
+            font-size: 30px;
+            word-spacing: 10px;
+            letter-spacing: 3px;
+            text-shadow: 1px 1px 1px white;
+            color: red;
+        }
+
+        #butsContainer {
+            width: 100%;
+            height: 50px;
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        .lgButs {
+            height: 50px;
+            width: 150px;
+            font-size: 24px;
+            border-radius: 5px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            border: none;
+            box-shadow: 2px 2px 5px cornsilk;
+        }
+
+        #fb {
+
+            /* background-color: rgb(65, 65, 147); */
+            background-image: linear-gradient(80deg,blue,white,blue);
+            background-size: 800% ;
+            background-position: 800%;
+            
+        }
+        #fb:hover{
+            animation: colChange 5s linear infinite;
+            transition: all 5s;
+        }
+        #gl{
+            
+            background-image: linear-gradient(80deg,white,red,orange,green,blue,green,orange,red,white);
+            background-size: 800% ;
+            background-position: 800%;
+        }
+       
+        #gl:hover{
+            animation: colChange 15s linear infinite;
+            transition: all 5s;
+        }
+        
+        
+        @keyframes colChange {
+            from{
+                background-position: 0%;
+            }
+            to{
+                background-position: 800%;
+            }
+        }
+
+        #fbName {
+            color: white;
+        }
+        #glName{
+            color: white;
+        }
+        a {
+            text-decoration: none;
+        }
+
+        img {
+            height: 30px;
+        }
+
+        .inpTags {
+            width: 80%;
+            height: 50px;
+            border-radius: 10px;
+            outline: none;
+            border: none;
+            box-shadow: 2px 2px 2px black;
+            padding-left: 10px;
+            font-size: 20px;
+        }
+        #eyeContainer{
+            width: 82%;
+            padding-left: 0px;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+        #inpPass{
+            height: 100%;
+            width: 80%;
+            border: none;
+            outline: none;
+            font-size: 20px;    
+        }
+        #eyeImg {
+            height: 30px;
+        }
+
+        #subBut {
+            height: 40px;
+            width: 50%;
+            font-size: 24px;
+            font-weight: 900;
+            outline: none;
+            border: none;
+            border-radius:5px;
+            letter-spacing: 8px;
+            box-shadow: 2px 2px 2px black;
+            background-image: linear-gradient(75deg,#C9FFBF,#FFAFBD);
+        }
+
+        #subBut:hover {
+            animation: butDesign 0.5s linear infinite;
+        }
+
+        @keyframes butDesign {
+
+            0%,7% {
+                transform: rotateZ(0deg);
+                box-shadow: 0px 0px 0px red;
+            }
+
+            15% {
+                transform: rotate(-15deg);
+                box-shadow: 0px 0px 0px #0c3f88;
+            }
+
+            20% {
+                transform: rotate(10deg) skewX(-10deg) skewY(0deg);
+                box-shadow: 0px 0px 10px red;
+            }
+
+            25% {
+                transform: rotate(-10deg) skewX(-20deg) skewY(0deg);
+                box-shadow: 0px 0px 10px #0c3f88;
+            }
+
+            30% {
+                transform: rotate(6deg) skewX(0deg) skewY(10deg);
+                box-shadow: 0px 0px 10px red;
+            }
+
+            35% {
+                transform: rotate(-40deg) skewX(0deg) skewY(20deg);
+                box-shadow: 0px 0px 10px #0c3f88;
+            }
+
+            40%,100% {
+                transform: rotate(0deg);
+                border: none;
+            }
+        }
+        #verification-msg{
+        	color: white;
+        	font-size: 40px;
+        	position: absolute;
+        	top: 120px;
+        	text-shadow: 1px 1px 2px #FFAFBD;
+        }
+        a{
+			text-shadow: 1px 1px 1px black;
+		}
+    </style>
+
+</head>
+
+<body onload="stopBack()">
+    <header>
+        <div class="head-style">
+            <img class="logos" th:src="@{/Images/logo.png}" alt="">
+            <h1 class="heading">Spring Expenses Tracker </h1>
+        </div>
+    </header>
+	
+    <section class="loginContainer">
+    	<h1 id="verification-msg" th:text="${msg}"></h1>
+        <form method="post"  th:action="@{/loginUser}">
+            <div id="box-container">
+                <div>
+                    <h1 id="sinHeading">Sign In With</h1>
+                </div>
+
+                <div id="butsContainer">
+                    <button id="fb" class="lgButs">
+                        <img th:src="@{/Images/facebook.png}" >
+                        <a id="fbName" th:href="@{https://www.facebook.com}">facebook</a>
+                    </button>
+                    <button id="gl" class="lgButs">
+                        <img th:src="@{/Images/google.png}" >
+                        <a id="glName" th:href="@{https://accounts.google.com}">Google</a>
+                    </button>
+                </div>
+
+                <input class="inpTags" id="uName" type="text" placeholder="Enter user Name" name ="userName" required onfocus="borderOn(this.id)" onblur="borderOFF(this.id)">
+                <div id="eyeContainer" class="inpTags">
+                    <input id="inpPass" type="password" placeholder="Enter password" name ="password" required onfocus="borderOn('eyeContainer')" onblur="borderOFF('eyeContainer')">
+                    <img id="eyeImg" th:src="@{/Images/eye.png}"  onmousedown="openImage()" onmouseup="closeImage()">
+                </div>
+
+                <input id="subBut" type="submit" value="Login">
+
+                <a th:href="@{/project/forgotPassword}"> Forgot Password?</a>
+                <h1>
+                    New User? <a th:href="@{/project/sgnUpPage}">SignUp Now</a>
+                </h1>
+                
+            </div>
+        </form>
+        <div id="a1"></div>
+    </section>
+
+
+	<script th:src="@{/javaScript/javaScript.js}"></script>
+</body>
+
+</html>

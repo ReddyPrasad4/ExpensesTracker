@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+    <title>Expenses Tracker</title>
+
+    <link rel="icon" th:href="@{/Images/logo.png}">
+    <link rel="stylesheet"  type="text/css" th:href="@{/css/homeLayout.css}">
+	
+    <style>
+
+        .container {
+            height: 600px;
+            width: 100%;
+            /* background-color: red; */
+            /* background-image: linear-gradient(75deg,#ED008C,#FFF000); */
+            background-image: linear-gradient(75deg, rgba(173, 216, 230, 0.621), rgba(128, 128, 128, 0.686));
+            /* background-color: rgba(128, 128, 128, 0.521); */
+        }
+
+        #div1,#div3 {
+            height: 280px;
+            width: 100%;
+       
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+
+        #div2 {
+            height: 50px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .homeImages {
+            height: 150px;
+        }
+
+        .imgSections {
+            height: 270px;
+            width: 300px;
+            /* background-color: orange; */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        .imgSections:hover .homeImages {
+        	animation: butDesign 1s linear infinite;
+            transition: all 5s;
+        }
+         
+
+        @keyframes butDesign {
+
+            0%,
+            7% {
+                transform: rotateZ(0deg);
+               
+            }
+
+            15% {
+                transform: rotate(-15deg);
+            }
+
+            20% {
+                transform: rotate(10deg) skewX(-10deg) skewY(0deg);
+            }
+
+            25% {
+                transform: rotate(-10deg) skewX(-20deg) skewY(0deg);
+            }
+
+            30% {
+                transform: rotate(6deg) skewX(0deg) skewY(10deg);
+            }
+
+            35% {
+                transform: rotate(-40deg) skewX(0deg) skewY(20deg);
+            }
+
+            50% {
+                transform: rotate(0deg) skewX(20deg) skewY(0deg);
+            }
+
+            75% {
+                transform: rotate(10deg) skewX(10deg) skewY(10deg);
+            }
+            
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+
+       
+        #vwExp{
+        	
+        	border-radius: 100%;  
+        }
+
+        #greetUser {
+            font-size: 35px;
+            color: rgb(7, 226, 255);
+            text-shadow: 2px 2px 1px blue , -2px -2px 1px black ;
+            word-spacing: 15px;
+            letter-spacing: 5px;
+
+        }
+        #displayImage{
+			height: 60px;
+			width: 60px;
+			border-radius: 100px;
+			border: 2px solid silver;
+			filter:drop-shadow(1px 1px 2px black);
+		}
+
+        footer {
+            height: 40px;
+            background-color: gray; 
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #msgTag{
+			position: absolute;
+			color: green;
+			left: 40%;
+			 text-shadow:  1px 1px 2px black;
+		}
+    </style>
+</head>
+
+<body th:unless="${session==null}">
+    <header>
+        <div class="head-style">
+            <img class="logos" th:src="@{/Images/logo.png}" alt="">
+            <h1 class="heading">Spring Expenses Tracker </h1>
+        </div>
+        <div class="accountContainer">
+			
+			<img id="displayImage" th:src="'data:image;base64,'+${session.image}" th:if="${session.userDTO.imageDTO!=null}" >
+            <img id="displayImage" th:src="@{/Images/account.png}" th:unless="${session.userDTO.imageDTO!=null}"  >
+            
+            
+            <!--<img id="settingsImg" class="logos" th:src="@{/Images/setting.png}" alt="">-->
+            <div id="dataListNames">
+                <a th:href="@{/project/update}">
+					<button class="buts">Update Profile</button>
+				</a>
+				<a th:href="@{/project/aboutUs}">
+					<button class="buts">About Us</button>
+				</a>
+                <a>
+					<button class="buts">Contact Us</button>
+				</a>
+                
+               	<a th:href="@{/logout}">
+               		<button class="buts" >Logout</button>
+               	</a> 
+            </div>
+        </div>
+    </header>
+	<h1 id="msgTag" style="color: red;" th:text="${msg}"> </h1>
+    <section class="container">
+        <div id="div1">
+            <a th:href="@{/project/addExpenses}">
+                <div class="imgSections">
+                    <img class="homeImages" th:src="@{/Images/add expense.png}" alt="">
+                    <h1>Add Expenses</h1>
+                </div>
+            </a>
+            <!--  viwExpenses it is not the AppController method ,it is from ExpensesController -->
+            <a th:href="@{/viwExpenses/{userId} (userId=${session.userDTO.userId})}">
+                <div class="imgSections">
+                    <img id="vwExp" class="homeImages" th:src="@{/Images/ViewExpenses.png}" alt="">
+                    <h1>View Expenses</h1>
+                </div>
+            </a>
+        </div>
+        <div id="div2">
+            <h1 id="greetUser">Welcome <span id="name" th:text="${session.userDTO.fullName}"> </span> </h1>
+        </div>
+        <div id="div3">
+            <a th:href="@{/project/totalExp}">
+                <div class="imgSections">
+                    <img class="homeImages" th:src="@{/Images/total expenses.png}" alt="">
+                    <h1>Total Expenses</h1>
+                </div>
+            </a>
+            <a th:href="@{/project/filterExp}">
+                <div class="imgSections">
+                    <img class="homeImages" th:src="@{/Images/FilterExpenses.png}" alt="">
+                    <h1>Filter Expenses</h1>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <p> &copy; 2023 xyz. All rights reserved</p>
+    </footer>
+    
+    
+    
+</body>
+
+</html>

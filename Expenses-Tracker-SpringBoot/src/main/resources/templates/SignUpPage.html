@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Expenses Tracker</title>
+
+    <link rel="icon" th:href="@{/Images/logo.png}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/homeLayout.css}">
+
+    <style>
+        section {
+            height: 600px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: url(/Images/sign-up.svg);
+            background-repeat: no-repeat;
+            background-size: 50% 50%;
+            background-position: center right;
+
+        }
+       
+
+        #signUpContainer {
+            width: 500px;
+            height: 550px;
+            background-color: rgba(128, 128, 128, 0.641);
+            border-radius: 10px;
+            box-shadow: 5px 5px 15px black;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+            /* position: absolute; */
+        }
+        #a1{
+            width: 500px;
+            height: 550px;
+            border-radius: 100%;
+            position: absolute;
+            z-index: -2;
+            background-image: linear-gradient(75deg,red,blue,orange,black,yellow,white,purple,green,lightblue,pink);
+            background-size: 800%;
+            background-position: 800%;
+            animation: backColChange 5s linear  infinite  ;
+            filter: blur(70px);
+        }
+
+        @keyframes backColChange{
+            from{
+                background-position: 0%;
+            }
+            to{
+                background-position: 800%;
+            }
+        }
+
+        #imgContainer {
+            width: 20%;
+            height: 400px;
+        }
+
+        #signUPHeading {
+            font-size: 30px;
+            letter-spacing: 5px;
+            word-spacing: 10px;
+            text-shadow: 1px 1px 1px black;
+        }
+
+        .signupInpTags {
+            height: 40px;
+            width: 70%;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+            box-shadow: 2px 2px 2px black;
+            font-size: 20px;
+            padding-left: 10px;
+
+        }
+        #eyeContainer{
+            width: 72%;
+            padding-left: 0px;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+        #inpPass{
+            height: 100%;
+            width: 80%;
+            border: none;
+            outline: none;
+            font-size: 20px;
+        }
+        #eyeImg {
+            height: 30px;
+        }
+
+        #sign-up-But {
+            height: 40px;
+            width: 50%;
+            font-size: 24px;
+            font-weight: 900;
+            outline: none;
+            border: none;
+            letter-spacing: 8px;
+            box-shadow: 2px 2px 2px black;
+            background-image: linear-gradient(75deg,#C9FFBF,#FFAFBD);
+        }
+
+        #sign-up-But:hover {
+            animation: butDesign 0.5s linear infinite;
+        }
+
+        @keyframes butDesign {
+
+            0%,7% {
+                transform: rotateZ(0deg);
+                box-shadow: 0px 0px 0px red;
+            }
+
+            15% {
+                transform: rotate(-15deg);
+                box-shadow: 0px 0px 0px #0c3f88;
+            }
+
+            20% {
+                transform: rotate(10deg) skewX(-10deg) skewY(0deg);
+                box-shadow: 0px 0px 10px red;
+            }
+
+            25% {
+                transform: rotate(-10deg) skewX(-20deg) skewY(0deg);
+                box-shadow: 0px 0px 10px #0c3f88;
+            }
+
+            30% {
+                transform: rotate(6deg) skewX(0deg) skewY(10deg);
+                box-shadow: 0px 0px 10px red;
+            }
+
+            35% {
+                transform: rotate(-40deg) skewX(0deg) skewY(20deg);
+                box-shadow: 0px 0px 10px #0c3f88;
+            }
+
+            40%,100% {
+                transform: rotate(0deg);
+                border: none;
+            }
+        }
+
+
+        #signImg {
+            height: 200px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <header>
+        <div class="head-style">
+            <img class="logos" th:src="@{/Images/logo.png}" alt="">
+            <h1 class="heading">Spring Expenses Tracker </h1>
+        </div>
+    </header>
+    <section>
+        <form id="formTag" method="post" th:action="@{/register}" >
+            <div id="a1"></div>
+            <div id="signUpContainer">
+
+                <h1 id="signUPHeading">Create Account</h1>
+                <input class="signupInpTags" id="yName" name="fullName" type="text" placeholder="Enter Your Name" required="required" onfocus="borderOn(this.id)" onblur="borderOFF(this.id)">
+                <input class="signupInpTags" id="uName" name="userName" type="text" placeholder="Enter User Name" required="required" onfocus="borderOn(this.id)" onblur="borderOFF(this.id)">
+                <input class="signupInpTags" id="email" name="email" type="text" placeholder="Enter Email" required="required" onfocus="borderOn(this.id)" onblur="borderOFF(this.id)">
+                <input class="signupInpTags" id="mbl" name="mobileNo" type="text" placeholder="Enter Mobile Number" required="required" onfocus="borderOn(this.id)" onblur="borderOFF(this.id)">
+                <div id="eyeContainer" class="signupInpTags">
+                    <input id="inpPass" name="password" type="text" placeholder="Enter password" required="required" onfocus="borderOn('eyeContainer')" onblur="borderOFF('eyeContainer')">
+                    <img id="eyeImg" th:src="@{/Images/eye.png}"  onmousedown="openImage()" onmouseup="closeImage()">
+                </div>
+                <input class="signupInpTags" id="pass" name="rePass" type="text" placeholder="Re-Enter Your password" required="required" onfocus="borderOn(this.id)" onblur="borderOFF(this.id)">
+                <input id="sign-up-But" class="signupInpTags" type="submit" value="SignUp">
+                
+                <h1 style="color: red;" th:text="${msg}"></h1>
+                
+                <h1>Already have an account?
+                    <a th:href="@{/project/sgnInPage}">Login Here</a>
+                </h1>
+					
+            </div>
+        </form>
+       
+        <div id="imgContainer">
+        </div>
+
+
+    </section>
+
+    <script th:src="@{/javaScript/javaScript.js}"></script>
+</body>
+
+</html>

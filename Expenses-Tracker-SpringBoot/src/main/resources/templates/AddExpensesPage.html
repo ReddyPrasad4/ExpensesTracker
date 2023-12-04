@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <title>Expenses Tracker</title>
+
+    <link rel="icon" th:href="@{/Images/logo.png}">
+    <link rel="stylesheet"  type="text/css" th:href="@{/css/homeLayout.css}">
+    <style>
+        #homeImg {
+            height: 70px;
+            position: absolute;
+            left: 50%;
+            top: 20px;
+            filter: drop-shadow(2px 2px 2px black);
+
+        }
+
+        #homeImg:hover {
+            animation: butDesign 0.5s linear infinite;
+        }
+
+        @keyframes butDesign {
+
+            0%,
+            7% {
+                transform: rotateZ(0deg);
+                filter: drop-shadow(0px 0px 0px red);
+            }
+
+            15% {
+                transform: rotate(-15deg);
+                filter: drop-shadow(0px 0px 0px #0c3f88);
+            }
+
+            20% {
+                transform: rotate(10deg) skewX(-10deg) skewY(0deg);
+                filter: drop-shadow(0px 0px 10px red);
+            }
+
+            25% {
+                transform: rotate(-10deg) skewX(-20deg) skewY(0deg);
+                filter: drop-shadow(0px 0px 10px #0c3f88);
+            }
+
+            30% {
+                transform: rotate(6deg) skewX(0deg) skewY(10deg);
+                filter: drop-shadow(0px 0px 10px red);
+            }
+
+            35% {
+                transform: rotate(-40deg) skewX(0deg) skewY(20deg);
+                filter: drop-shadow(0px 0px 10px #0c3f88);
+            }
+
+            40%,
+            100% {
+                transform: rotate(0deg);
+                border: none;
+            }
+        }
+
+        section {
+            height: 600px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* background-image: linear-gradient(75deg,#833ab4,#fd1d1d,#fcb045); */
+        }
+
+        #inpTagsContainer,
+        #imageContainer {
+            width: 400px;
+            height: 500px;
+            background-color: rgb(149, 36, 36);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            border-radius: 10px;
+            box-shadow: 2px 2px 12px black;
+        }
+
+        #imageContainer {
+            width: 600px;
+            background-color: transparent;
+            box-shadow: none;
+        }
+
+        #mainImage {
+            height: 60%;
+            box-shadow: 5px 5px 6px black;
+        }
+
+        #addExpHeading {
+            color: whitesmoke;
+            font-size: 35px;
+            letter-spacing: 5px;
+            word-spacing: 10px;
+            text-shadow: 2px 2px 2px black;
+        }
+
+        .inputTags {
+            height: 40px;
+            width: 70%;
+            border-radius: 10px;
+            padding-left: 10px;
+            outline: none;
+            border: none;
+            box-shadow: 2px 2px 2px black;
+            font-size: 20px;
+
+        }
+
+        #txtArea {
+            height: 70px;
+        }
+
+        #addSubBut {
+            width: 40%;
+            font-weight: 900;
+            background-color: skyblue;
+        }
+
+        #addSubBut:hover {
+            background-size: 800%;
+            background-position: 800%;
+            /* background-image: linear-gradient(75deg,#1fa2ff,#12d8fa,#A6FFCB,#1fa2ff); */
+            background-image: linear-gradient(75deg, #833ab4, #fd1d1d, #fcb045, #833ab4);
+            animation: translateColor 5s linear infinite;
+            transform: scale(1.2)
+        }
+
+        @keyframes translateColor {
+            from {
+                background-position: 0%;
+
+            }
+
+            to {
+                background-position: 800%;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <header>
+        <div class="head-style">
+            <img class="logos" th:src="@{/Images/logo.png}" alt="">
+            <h1 class="heading">Spring Expenses Tracker </h1>
+        </div>
+        <a th:href="@{/project/homePage}">
+            <img id="homeImg" th:src="@{/Images/HomeImg.png}" alt="">
+        </a>
+        <div class="accountContainer">
+            <img id="settingsImg" class="logos" th:src="@{/Images/setting.png}" alt="">
+            <div id="dataListNames">
+                <a th:href="@{/project/update}">
+					<button class="buts">Update Profile</button>
+				</a>
+                <a th:href="@{/project/aboutUs}">
+					<button class="buts">About Us</button>
+				</a>
+                <a>
+					<button class="buts">Contact Us</button>
+				</a>
+                <a th:href="@{/project/sgnInPage}">
+               		<button class="buts">Logout</button>
+               	</a> 
+            </div>
+        </div>
+    </header>
+    <section>
+        <div id="imageContainer">
+            <img id="mainImage" th:src="@{/Images/addExpenses.webp}" alt="">
+        </div>
+        <form method="post" id="formTag" th:action="@{/addExpen/{userId} (userId=${session.userDTO.userId})}" th:unless="${session==null}">
+            <div id="inpTagsContainer">
+
+                <h1 id="addExpHeading">Add Expenses</h1>
+                <input class="inputTags" id="amt" type="text" name="amount" placeholder="Enter Amount" onfocus="borderOn(this.id)" onblur="borderOFF(this.id)">
+                <input class="inputTags" id="dt" type="date" name="date" placeholder="DD-MON-YEAR" onfocus="borderOn(this.id)" onblur="borderOFF(this.id)">
+                <input class="inputTags" id="cat" list="a" name="category" placeholder="Select category"  onfocus="borderOn(this.id)" onblur="borderOFF(this.id)">
+                <datalist  id="a" >	
+                    <option>Utilities</option>
+                    <option>Transportation</option>
+                    <option>Groceries</option>
+                    <option>Dining Out</option>
+                    <option>Health care</option>
+                    <option>Entertainment</option>
+                    <option>Education</option>
+                    <option>Personal Care</option>
+                    <option>Clothing</option>
+                    <option>Home Maintenance</option>
+                    <option>Gifts and Donations</option>
+                    <option>Savings and Investments</option>
+                    <option>Tax</option>
+                    <option>Other</option>
+                </datalist>
+                <textarea class="inputTags" id="txtArea" name="description" cols="30" rows="10" placeholder="Enter Description" onfocus="borderOn(this.id)" onblur="borderOFF(this.id)"></textarea>
+                <input id="addSubBut" class="inputTags" type="submit" value="Add +">
+				<h1 style="color: red;" th:text="${msg}"></h1>
+            </div>
+        </form>
+    </section>
+    
+   	<script type="text/javascript">
+   		
+   		// This function will triger when user tries to leave the page or navigate to another page
+	    onbeforeunload = function() {
+		   document.getElementById("formTag").reset();
+	    }
+   		
+   		function borderOn(idOfTag)
+	    {
+	        document.getElementById(idOfTag).style.border= "2px solid lime"
+	    }
+	    function borderOFF(idOfTag)
+	    {
+	        document.getElementById(idOfTag).style.border= "none"
+	    }
+   	</script>
+</body>
+
+</html>

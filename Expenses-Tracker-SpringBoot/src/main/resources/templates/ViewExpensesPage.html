@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>View Expenses</title>
+
+    <link rel="icon" th:href="@{/Images/logo.png}">
+    <link rel="stylesheet"  type="text/css" th:href="@{/css/homeLayout.css}">
+
+    <style>
+        #homeImg {
+            height: 70px;
+            position: absolute;
+            left: 50%;
+            top: 20px;
+            filter: drop-shadow(2px 2px px black);
+        }
+        #homeImg:hover {
+            animation: butDesign 0.5s linear infinite;
+        }
+
+        @keyframes butDesign {
+
+            0%,
+            7% {
+                transform: rotateZ(0deg);
+                filter: drop-shadow(0px 0px 0px red);
+            }
+
+            15% {
+                transform: rotate(-15deg);
+                filter: drop-shadow(0px 0px 0px #0c3f88);
+            }
+
+            20% {
+                transform: rotate(10deg) skewX(-10deg) skewY(0deg);
+                filter: drop-shadow(0px 0px 10px red);
+            }
+
+            25% {
+                transform: rotate(-10deg) skewX(-20deg) skewY(0deg);
+                filter: drop-shadow(0px 0px 10px #0c3f88);
+            }
+
+            30% {
+                transform: rotate(6deg) skewX(0deg) skewY(10deg);
+                filter: drop-shadow(0px 0px 10px red);
+            }
+
+            35% {
+                transform: rotate(-40deg) skewX(0deg) skewY(20deg);
+                filter: drop-shadow(0px 0px 10px #0c3f88);
+            }
+
+            40%,
+            100% {
+                transform: rotate(0deg);
+                border: none;
+            }
+        }
+
+        section {
+            height: 600px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            /* background-image: linear-gradient(75deg,#833ab4,#fd1d1d,#fcb045); */
+        }
+
+        #viewExpHeading {
+            /* color: whitesmoke; */
+            font-size: 35px;
+            letter-spacing: 5px;
+            word-spacing: 10px;
+            text-shadow: 1px 1px 2px black;
+        }
+
+        #details {
+            height: 400px;
+            width: 900px;
+            border: 2px solid black;
+            overflow-y: auto;
+        }
+
+        /* table {
+            border-collapse: collapse;
+
+        } */
+
+        tr,th,td {
+            /* border: 2px solid black; */
+            border-bottom: 1px solid rgba(0, 0, 0, 0.119);
+            width: 140px;
+            height: 40px;
+            text-align: center;
+        }
+
+        .updateButs,.deleteButs {
+            height: 20px;
+            width: 60px;
+            border: none;
+            outline: none;
+            border-radius: 2px;
+            box-shadow: 1px 1px 2px black;
+            font-weight: bold;
+        }
+
+        .editButsContainer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .updateButs{
+            background-color: rgba(0, 0, 255, 0.618);
+        }
+        .deleteButs{
+            background-color: rgba(255, 0, 0, 0.575);
+        }
+       	#msgTag{
+       		font-size: 40px;
+       	}
+    </style>
+
+</head>
+
+<body>
+    <header>
+        <div class="head-style">
+            <img class="logos" th:src="@{/Images/logo.png}" alt="">
+            <h1 class="heading">Spring Expenses Tracker </h1>
+        </div>
+        <a th:href="@{/project/homePage}">
+            <img id="homeImg" th:src="@{/Images/HomeImg.png}" alt="">
+        </a>
+        <div class="accountContainer">
+            <img id="settingsImg" class="logos" th:src="@{/Images/setting.png}" alt="">
+            <div id="dataListNames">
+                <a th:href="@{/project/update}">
+					<button class="buts">Update Profile</button>
+				</a>
+                <a th:href="@{/project/aboutUs}">
+					<button class="buts">About Us</button>
+				</a>
+                <a>
+					<button class="buts">Contact Us</button>
+				</a>
+                <a th:href="@{/project/sgnInPage}">
+               		<button class="buts">Logout</button>
+               	</a> 
+            </div>
+        </div>
+    </header>
+    <section>
+        <h1 id="viewExpHeading">Expenses Details</h1>
+        <h1 id="msgTag" th:style="${listOfExpensesDTO.isEmpty() ? 'color: red;':'color: green;'}" th:text="${msg}" th:unless="${msg==null}"> </h1>
+        <div id="details">
+            <table>
+                <tr>
+                    <th>S.No</th>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+                <tr th:each="expenses,iterator:${listOfExpensesDTO}" th:unless="${expenses==null}">
+                    <td  th:text="${iterator.count}"></td>
+                    <!-- <td  th:text="${iterator.index+1}"></td>    we can use this also for serial numbers -->
+                    
+                    <td th:text="${expenses.date}"></td>
+                    <td th:text="${expenses.amount}"></td>
+                    <td th:text="${expenses.category}"></td>
+                    <td th:text="${expenses.description}"></td>
+                    <td class="editButsContainer">
+                        <a th:href="@{/project/updateExpenses/{expId} (expId=${expenses.expensesId})}">
+                        	<input class="updateButs" type="button" value="update">
+                        </a>
+                        <a th:href="@{/deleteExpense/{expId} (expId=${expenses.expensesId})}">
+                        	<input class="deleteButs" type="button" value="Delete">
+                        </a>
+                    </td>
+                </tr>
+
+
+            </table>
+        </div>
+    </section>
+</body>
+
+</html>

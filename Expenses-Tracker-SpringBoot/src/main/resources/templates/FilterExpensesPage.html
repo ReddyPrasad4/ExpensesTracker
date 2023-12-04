@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Filter Expenses</title>
+
+    <link rel="icon" th:href="@{/Images/logo.png}">
+    <link rel="stylesheet"  type="text/css" th:href="@{/css/homeLayout.css}">
+    <style>
+        #homeImg {
+            height: 70px;
+            position: absolute;
+            left: 50%;
+            top: 20px;
+            filter: drop-shadow(2px 2px 2px black);
+
+        }
+
+        #homeImg:hover {
+            animation: homeDesign 0.5s linear infinite;
+        }
+
+        @keyframes homeDesign {
+
+            0%,
+            7% {
+                transform: rotateZ(0deg);
+                filter: drop-shadow(0px 0px 0px red);
+            }
+
+            15% {
+                transform: rotate(-15deg);
+                filter: drop-shadow(0px 0px 0px #0c3f88);
+            }
+
+            20% {
+                transform: rotate(10deg) skewX(-10deg) skewY(0deg);
+                filter: drop-shadow(0px 0px 10px red);
+            }
+
+            25% {
+                transform: rotate(-10deg) skewX(-20deg) skewY(0deg);
+                filter: drop-shadow(0px 0px 10px #0c3f88);
+            }
+
+            30% {
+                transform: rotate(6deg) skewX(0deg) skewY(10deg);
+                filter: drop-shadow(0px 0px 10px red);
+            }
+
+            35% {
+                transform: rotate(-40deg) skewX(0deg) skewY(20deg);
+                filter: drop-shadow(0px 0px 10px #0c3f88);
+            }
+
+            40%,
+            100% {
+                transform: rotate(0deg);
+                border: none;
+            }
+        }
+
+
+        section {
+            height: 600px;
+            width: 100%;
+            display: flex;
+           	flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: cornsilk;
+            /* background-image: linear-gradient(75deg,#833ab4,#fd1d1d,#fcb045); */
+            /* background-image: linear-gradient(75deg,#C9FFBF,#FFAFBD); */
+        }
+
+        #totalExpContainer {
+            height: 500px;
+            width: 600px;
+            background-color: rgba(128, 128, 128, 0.608);
+            border-radius: 10px;
+            box-shadow: 5px 5px 10px black;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+
+        }
+
+        #viewExpHeading {
+            /* color: whitesmoke; */
+            color: navy;
+            font-size: 45px;
+            letter-spacing: 5px;
+            word-spacing: 10px;
+            text-shadow: 2px 2px 2px black;
+        }
+
+        .container {
+            height: 100px;
+            width: 70%;
+            /* background-color: red; */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+          	align-items: center;
+            
+        }
+        #dateContainer , #lablesContainer{
+			width: 100%;
+			display: flex;
+            justify-content: space-between;
+          	align-items: center;
+		}
+
+        .hds {
+            font-size: 24px;
+            font-weight: bolder;
+            color: rgb(64, 0, 0);
+            text-shadow: 1px 1px 2px black;
+        }
+
+        .dateTags {
+            height: 40px;
+            width: 400px;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+            box-shadow: 2px 2px 4px black;
+            font-size: 20px;
+            padding-left: 10px;
+        }
+        #dateTag1,#dateTag2 ,.dateLables{
+				width: 150px;
+		}
+
+        #submitBut {
+            height: 40px;
+            width: 120px;
+            border: none;
+            outline: none;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px black;
+            font-size: 20px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            text-shadow: 1px 1px 2px black;
+            background-image: linear-gradient(75deg, #833ab4, #fd1d1d, #fcb045, #833ab4);
+        }
+
+        #submitBut:hover {
+            animation: butDesign 0.5s linear infinite;
+        }
+
+        @keyframes butDesign {
+
+            0%,
+            7% {
+                transform: rotateZ(0deg);
+                box-shadow: 0px 0px 0px red;
+            }
+
+            15% {
+                transform: rotate(-15deg);
+                box-shadow: 0px 0px 0px #0c3f88;
+            }
+
+            20% {
+                transform: rotate(10deg) skewX(-10deg) skewY(0deg);
+                box-shadow: 0px 0px 10px red;
+            }
+
+            25% {
+                transform: rotate(-10deg) skewX(-20deg) skewY(0deg);
+                box-shadow: 0px 0px 10px #0c3f88;
+            }
+
+            30% {
+                transform: rotate(6deg) skewX(0deg) skewY(10deg);
+                box-shadow: 0px 0px 10px red;
+            }
+
+            35% {
+                transform: rotate(-40deg) skewX(0deg) skewY(20deg);
+                box-shadow: 0px 0px 10px #0c3f88;
+            }
+
+            40%,
+            100% {
+                transform: rotate(0deg);
+                border: none;
+            }
+        }
+        h3{
+        	color: rgb(26, 26, 26);
+        }
+    </style>
+
+</head>
+
+<body>
+    <header>
+        <div class="head-style">
+            <img class="logos" th:src="@{/Images/logo.png}" alt="">
+            <h1 class="heading">Spring Expenses Tracker </h1>
+        </div>
+        <a th:href="@{/project/homePage}">
+            <img id="homeImg" th:src="@{/Images/HomeImg.png}" alt="">
+        </a>
+        <div class="accountContainer">
+            <img id="settingsImg" class="logos" th:src="@{/images/setting.png}" alt="">
+            <div id="dataListNames">
+                <a th:href="@{/project/update}">
+					<button class="buts">Update Profile</button>
+				</a>
+                <a th:href="@{/project/aboutUs}">
+					<button class="buts">About Us</button>
+				</a>
+                <a>
+					<button class="buts">Contact Us</button>
+				</a>
+                <a th:href="@{/project/sgnInPage}">
+               		<button class="buts">Logout</button>
+               	</a> 
+            </div>
+        </div>
+    </header>
+    <section>
+	<h1 style="color: red; font-size: 40px; text-shadow: 1px 1px 1px black;" th:text="${msg}"></h1>
+        <form id="formTag" th:action="@{/filterExpensesAccordingTOData}">
+			
+            <div id="totalExpContainer">
+				
+                <h1 id="viewExpHeading">Filter Expenses</h1>
+                <h3>(Enter data according to your requirement)</h3>
+                <div class="container" >
+                    <label class="hds">Select Dates</label>
+                    <div id="lablesContainer">
+						<h1 class="dateLables" >From Date</h1>
+						<h1 class="dateLables">To Date</h1>
+					</div>
+                    <div id="dateContainer">
+						<input id="dateTag1" class="dateTags" type="date" name="startDate" placeholder="dd-mm-yy" onfocus="borderOn(this.id)" onblur="borderOFF(this.id)">
+                    	<input id="dateTag2" class="dateTags" type="date" name="endDate" placeholder="dd-mm-yy" onfocus="borderOn(this.id)" onblur="borderOFF(this.id)">
+					</div>
+                </div>
+                <div class="container">
+                    <label class="hds" >Select Category</label>
+                    <input id="selectTag" class="dateTags" list="a" placeholder="select category"  name="category" onfocus="borderOn(this.id)" onblur="borderOFF(this.id)">
+	                   <datalist id="a">
+		                    <option>Utilities</option>
+		                    <option>Transportation</option>
+		                    <option>Groceries</option>
+		                    <option>Dining Out</option>
+		                    <option>Health care</option>
+		                    <option>Entertainment</option>
+		                    <option>Education</option>
+		                    <option>Personal Care</option>
+		                    <option>Clothing</option>
+		                    <option>Home Maintenance</option>
+		                    <option>Gifts and Donations</option>
+		                    <option>Savings and Investments</option>
+		                    <option>Tax</option>
+		                    <option>Other</option>
+	                   </datalist>
+                </div>
+                <div class="container">
+                    <label class="hds">Enter Amount in Ranges</label>
+                    <input id="amtTag" class="dateTags" type="text" name="amountRange" placeholder="eg. 100-200  (min-max)" onfocus="borderOn(this.id)" onblur="borderOFF(this.id)">
+                </div>
+                <input id="submitBut" type="submit">
+            </div>
+        </form>
+    </section>
+    
+    <script th:src="@{/javaScript/javaScript.js}"></script>
+</body>
+
+</html>

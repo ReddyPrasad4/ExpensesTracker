@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogOut</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: opx;
+
+        }
+        body{
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+        }
+        .containers{
+            height: 100%;
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+            border-radius: 20px;
+            transition: all 500s;
+            
+        }
+        .containers:hover {
+            background-image: linear-gradient(90deg,#cc2b5e,#753a88);
+        }
+        .containers:hover .buttonsTags{
+            background-image: linear-gradient(90deg,lightBlue,black);
+        }
+        .buttonsTags{
+            height: 80px;
+            width: 250px;
+            border: none;
+            outline: none;
+            font-size: 40px;
+            font-weight: bold;
+            border-radius: 10px;
+            word-spacing: 10px;
+            letter-spacing: 3px;
+            box-shadow: 5px 5px 15px black;
+            transition: all 30s;
+            background-image: linear-gradient(90deg,black,lightBlue);
+        }
+        .buttonsTags:hover
+        {
+            animation: butDesign 0.5s linear infinite;
+            
+            
+        }
+
+        h1{
+            font-size: 50px;
+            text-shadow: 2px 2px 5px aqua;
+        }
+        
+        @keyframes butDesign {
+
+            0%,7% {
+                transform: rotateZ(0deg);
+                box-shadow: 0px 0px 0px white;
+            }
+
+            15% {
+                transform: rotate(-15deg);
+                box-shadow: 0px 0px 0px powderblue;
+            }
+
+            20% {
+                transform: rotate(10deg) skewX(-10deg) skewY(0deg);
+                box-shadow: 0px 0px 10px white;
+            }
+
+            25% {
+                transform: rotate(-10deg) skewX(-20deg) skewY(0deg);
+                box-shadow: 0px 0px 10px powderblue;
+            }
+
+            30% {
+                transform: rotate(6deg) skewX(0deg) skewY(10deg);
+                box-shadow: 0px 0px 10px white;
+            }
+
+            35% {
+                transform: rotate(-40deg) skewX(0deg) skewY(20deg);
+                box-shadow: 0px 0px 10px powderblue;
+            }
+
+            40%,100% {
+                transform: rotate(0deg);
+                border: none;
+            }
+        }
+
+    </style>
+    <script>
+		function stopBack()
+        {
+			history.go(1)
+		}
+	</script>
+</head>
+
+<body onload="stopBack()">
+    <div class="containers" id="signInContainer">
+        <h1>Do you want to sign in again</h1>
+        <a th:href="@{/project/sgnInPage}">
+            <button class="buttonsTags">Sign In </button >
+        </a>
+    </div>
+    <div class="containers" id="signUpContainer">
+        <h1>Do you want to register New user</h1>
+        <a th:href="@{/project/sgnUpPage}">
+            <button class="buttonsTags">Sign Up </button>
+        </a>
+    </div>
+</body>
+</html>
